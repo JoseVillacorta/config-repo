@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: ms-productos
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/syncap
+    username: postgres
+    password: admin
+
+  main:
+    web-application-type: reactive
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+
+custom:
+  properties:
+    name: Profile Dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: ms-pedidos
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/syncap
+    username: postgres
+    password: admin
+  main:
+    web-application-type: reactive
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+ms-productos:
+  url: http://localhost:8081

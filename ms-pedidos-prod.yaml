@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: ms-pedidos
+  r2dbc:
+    url: r2dbc:postgresql://prod-server:5432/db_pedidos_prod
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  main:
+    web-application-type: reactive
+logging:
+  level:
+    root: WARN
+ms-productos:
+  url: http://localhost:8081
