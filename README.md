@@ -6,27 +6,37 @@ Repositorio centralizado de configuraciones para microservicios del Sistema de G
 
 ```
 config-repo/
-├── ms-productos-dev.yml    # Configuración desarrollo ms-productos
-├── ms-productos-qa.yml     # Configuración QA ms-productos
-├── ms-productos-prd.yml    # Configuración producción ms-productos
-├── ms-pedidos-dev.yml      # Configuración desarrollo ms-pedidos
-├── ms-pedidos-qa.yml       # Configuración QA ms-pedidos
-└── ms-pedidos-prd.yml      # Configuración producción ms-pedidos
+├── ms-productos-dev.yml      # Configuración desarrollo ms-productos
+├── ms-productos-docker.yaml  # Configuración Docker ms-productos
+├── ms-productos-qa.yml       # Configuración QA ms-productos
+├── ms-productos-prod.yml     # Configuración producción ms-productos
+├── ms-pedidos-dev.yml        # Configuración desarrollo ms-pedidos
+├── ms-pedidos-docker.yaml    # Configuración Docker ms-pedidos
+├── ms-pedidos-qa.yml         # Configuración QA ms-pedidos
+├── ms-pedidos-prod.yml       # Configuración producción ms-pedidos
+├── gateway-service.yaml      # Configuración desarrollo gateway
+├── gateway-service-docker.yaml # Configuración Docker gateway
+├── registry-service.yml      # Configuración desarrollo registry
+└── registry-service-docker.yml # Configuración Docker registry
 ```
 
 ## Configuraciones
 
-### Variables de Entorno Requeridas
-- `DB_USERNAME`: Usuario de PostgreSQL
-- `DB_PASSWORD`: Contraseña de PostgreSQL
-- `DB_URL`: URL de conexión a BD
-- `MS_PRODUCTOS_URL`: URL del microservicio productos
-
 ### Perfiles Soportados
 - **dev**: Desarrollo local
+- **docker**: Contenedores Docker
 - **qa**: Ambiente de pruebas
-- **prd**: Producción
+- **prod**: Producción
+
+### Configuraciones Docker
+- Usan nombres de contenedor para comunicación interna
+- Configuración de Eureka con `registry-service:8761`
+- Base de datos PostgreSQL en contenedor separado
+
+### Variables Importantes
+- `host.docker.internal`: Acceso a BD local desde contenedores
+- Nombres de servicio: `ms-productos`, `registry-service`, `config-server`
 
 ## Uso
 
-Este repositorio es utilizado por el **ms-config-server** para servir configuraciones centralizadas a todos los microservicios.
+Utilizado por **ms-config-server** para configuraciones centralizadas. Los perfiles Docker permiten despliegue completo con `docker-compose up --build`.
