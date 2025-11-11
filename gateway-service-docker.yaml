@@ -2,32 +2,38 @@ server:
   port: 8083
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
     service-url:
       defaultZone: http://registry-service:8761/eureka/
-    initial-instance-info-replication-interval-seconds: 5
-    instance-info-replication-interval-seconds: 10
 spring:
   application:
     name: gateway-service
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: ms-productos
-          uri: http://ms-productos:8081
-          predicates:
-            - Path=/productos/**
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+          routes:
+            - id: ms-productos
+              uri: http://ms-productos:8081
+              predicates:
+                - Path=/products/**
   security:
-    enabled: false
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: always
+    oauth2:
+      client:
+        registration:
+          oauth-client:
+            provider: oauth-server
+            client-id: oauth-client
+            client-secret: 12345678910
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8083/authorized            
+            scope: openid,profile
+        provider:
+          oauth-server:
+            authorization-uri: http://localhost:9000/oauth2/authorize
+            token-uri: http://localhost:9000/oauth2/token
+            user-info-uri: http://localhost:9000/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: http://localhost:9000/oauth2/jwks

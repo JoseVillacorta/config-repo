@@ -2,13 +2,16 @@ spring:
   application:
     name: ms-productos
   r2dbc:
-    url: r2dbc:postgresql://host.docker.internal:5432/syncap
+    url: r2dbc:postgresql://db:5432/syncap
     username: postgres
     password: admin
   main:
     web-application-type: reactive
   security:
-    enabled: false
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://oauth-server:9000
 server:
   port: 8081
 eureka:

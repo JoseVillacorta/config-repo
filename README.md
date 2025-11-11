@@ -39,4 +39,5 @@ config-repo/
 
 ## Uso
 
-Utilizado por **ms-config-server** para configuraciones centralizadas. Los perfiles Docker permiten despliegue completo con `docker-compose up --build`.
+Utilizado por **ms-config-server** para configuraciones. 
+Los perfiles Docker permiten despliegue completo con `docker-compose up --build`.
